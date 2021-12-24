@@ -1,0 +1,1 @@
+BlogXClient is a simple client designed to consume data from the BlogX PHP REST Api.

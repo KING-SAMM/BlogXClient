@@ -1,0 +1,43 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a, span
+{
+    display:inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover, span:hover
+{
+    color: white;
+}
+.container
+{
+    min-height: 300px;
+}
+.info
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    padding: 50px 10px;
+}
+
+.info > p
+{
+    font-size: 20px;
+}
+
+.info > p:first-child::first-line
+{
+    font-size: 30px;
+}
