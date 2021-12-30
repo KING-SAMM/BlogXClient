@@ -5,7 +5,24 @@
     box-sizing: border-box;
 }
 
-a, span
+body
+{
+     right: 350px;
+}
+
+nav
+{
+    position: relative;
+    /* right: 350px; */
+    width: 73vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    
+}
+
+span
 {
     display:inline-block;
     padding: 10px 20px;
@@ -15,11 +32,11 @@ a, span
     cursor: pointer;
 }
 
-a:hover, span:hover
+span:hover
 {
     color: white;
 }
-.container
+.info
 {
     min-height: 300px;
 }
@@ -40,4 +57,27 @@ a:hover, span:hover
 .info > p:first-child::first-line
 {
     font-size: 30px;
+}
+
+.adverts
+{
+    position: fixed;
+    width: 350px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #333;
+    z-index: 999;
+}
+
+.ads
+{
+    margin: 20px auto;
+}
+
+#output
+{
+    
+    width: 73vw;
+    right: 350px;
 }

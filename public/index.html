@@ -5,33 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlogX Client</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="bg-dark">
-        <nav>
-            <div>
-                <a href="index.html">Home</a>
-                <span id="getAllPosts">Blog</span>
-            </div>
-        </nav>
-        <h1 class="display-4 text-center text-white">BlogX Client</h1>
-    </header>
-    <div class="container">
-        <div id="output">
+    <nav id="nav" class="bg-dark">
+        <div class="text-center">
+            <span id="home">Home</span>
+            <span id="getAllPosts">Blog</span>
+        </div>
+    </nav>
+
+    <div id="output">
+        <header class="bg-info">
+            <h1 class="display-4 text-center text-white p-4">BlogX Client</h1>
+        </header>
+        <div class="adverts"></div>
+        <div class="container">
             <div class="info">
                 <p>Get posts from the BlogX API</p>
                 <p>Create your own posts. Add beautiful images to the posts you create. Update posts you have created.</p>
             </div>
         </div>
+        <footer class="bg-light mt-5">
+            <h3 class="text-center pt-4 pb-5">BlogX Client</h3>
+        </footer>
     </div>
 
-
-    <footer class="bg-light mt-5">
-        <h3 class="text-center pt-4 pb-5">BlogX Client</h3>
-    </footer>
     <script src="get.js"></script>
+    <script src="ad.js"></script>
 </body>
 </html>
