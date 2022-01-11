@@ -10,16 +10,16 @@ function newPost() {
     <div class="adverts"></div>
     <div class="container">
         <div class="info">
-            <span id="msg-success" class="text-info"></span>
+            <span id="msg-success" class="text-dark"></span>
             <span id="msg-error" class="text-danger"></span>
-            <form action="" method="post" class="contact-form">
+            <form action="" method="post" class="contact-form w-75">
                 <div class="form-group mt-2">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" required>
                 </div>
                 <div class="form-group mt-2">
                     <label for="body">Body</label>
-                    <input type="text" id="body" name="body" class="form-control" required>
+                    <textarea type="text" id="body" name="body" class="form-control" rows="8"></textarea>
                 </div>
                 <div class="form-group mt-2">
                     <label for="author">Author</label>
@@ -35,14 +35,14 @@ function newPost() {
                         <option value="5">Books</option>
                     </select>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-4 w-25">
                     <button type="submit" id="submit" name="submit" class="btn btn-primary form-control">Create</button>
                 </div>
             </form>
-            <div class="results">
+            <!--<div class="results">
                 <h2 class="results__heading">Form Data</h2>
                 <pre class="results__display-wrapper"><code class="results__display"></code></pre>
-            </div>
+            </div>-->
         </div>
     </div>
     <footer class="bg-light mt-5">

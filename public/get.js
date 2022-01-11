@@ -4,10 +4,6 @@ btn.addEventListener('click', fetchPosts);
 homeBtn.addEventListener('click', homeContent);
 
 
-// const editPostBtn = document.querySelector('#editPost');
-// editPostBtn.addEventListener('click', fetchPostToEdit(`${data.id}`));
-
-
 function homeContent() {
     const homeContent = `
     <header class="bg-info">
@@ -38,20 +34,49 @@ async function fetchOnePost(id) {
     let singlePost = "";
     
         singlePost += `
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLongTitle">This post will be deleted</h5>
+                        <div class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-dark">&times;</span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        Click OK to delete this post permanently. Note that this action cannot be reversed.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="deletePost" class="btn btn-danger" onclick="deletePost(${data.id})" data-bs-dismiss="modal">OK</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+            <!-- Page Cintent -->
             <header class="bg-info">
                 <h1 class="display-4 text-center text-white p-4">${data.title}</h1>
             </header>
             <div class="adverts"></div>
             <div class="container">
-                <div class="p-4">    
-                    <img src="${data.imageUrl}" alt="${data.title}" title="${data.title}"" />
+                <div class="info">
+                    <span id="del-msg-success" class="text-secondary"></span>
+                    <span id="del-msg-error" class="text-danger"></span>
+                    <div class="p-4">    
+                        <img src="${data.imageUrl}" alt="${data.title}" title="${data.title}"" />
 
-                    <p style="font-size: 16px;">By: ${data.author} | ${data.category_name}</p>
-                
-                    <p style="font-size: 20px;">${data.body}</p>
+                        <p style="font-size: 16px;">By: ${data.author} | ${data.category_name}</p>
+                    
+                        <p style="font-size: 20px;">${data.body}</p>
 
-                    <button type="button" id="editPost" name="editPost"  class="btn btn-primary" onclick="fetchPostToEdit(${data.id})">Edit</button>
-                    <button type="button" name="delete" class="btn btn-danger">Delete</button>
+                        <button type="button" id="editPost" name="editPost"  class="btn btn-primary" onclick="fetchPostToEdit(${data.id})">Edit</button>
+                        <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalCenter">Delete</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -65,8 +90,6 @@ async function fetchOnePost(id) {
 
 
 }
-
-
 
 
 async function fetchPosts() {
@@ -98,7 +121,7 @@ async function fetchPosts() {
                 </h4>
                 <img src="${post.imageUrl}" alt="${post.title}" title="${post.title}" width="80" height="80"  margin-left: 10px;" />
                 
-                <button id="readMore" class="btn btn-info" width="40" onclick="fetchOnePost(${post.id})">Read More</button>
+                <button id="readMore" class="btn btn-info test-primary w-25" width="" onclick="fetchOnePost(${post.id})">Read More</button>
             </div>
         `;
     });
@@ -112,10 +135,6 @@ async function fetchPosts() {
     document.querySelector('#output').innerHTML = posts;
 }
  
-
-
-
-
 
 async function fetchPostToEdit(id) {
     const res = await fetch("http://localhost/blogX/api/post/read_single.php?id=" + id);
@@ -134,7 +153,7 @@ async function fetchPostToEdit(id) {
         <div class="info">
             <span id="msg-success" class="text-info"></span>
             <span id="msg-error" class="text-danger"></span>
-            <form action="" class="edit-form">
+            <form action="" class="edit-form w-75">
                 <div class="form-group mt-2">
                     <label for="title">ID</label>
                     <input type="number" id="id" name="id" class="form-control" value="${editData.id}" readonly>
@@ -161,7 +180,7 @@ async function fetchPostToEdit(id) {
                         <option value="5">Books</option>
                     </select>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-4 w-25">
                     <button type="submit" id="submit" name="submit" class="btn btn-primary form-control">Save</button>
                 </div>
             </form>
@@ -265,4 +284,46 @@ async function fetchPostToEdit(id) {
      form.addEventListener('submit', handleEditFormSubmit);
     
 }
+
+
+// Delete Function 
+function deletePost(id) 
+{
+    // Call our function to get the form data.
+    const data = {id: id};
+
+    // Use `JSON.stringify()` to make the output valid, human-readable JSON.
+    let json_data = JSON.stringify(data, null, '  ');
+    
+    console.log(json_data)
+
+    // Send the form data off to the API (server)
+    request = new XMLHttpRequest()
+    request.onreadystatechange = respond;
+    request.open("DELETE", "http://localhost/blogX/api/post/delete.php", true)
+    request.setRequestHeader("Content-type", "application/json")
+    request.send(json_data)
+
+    // Response from server 
+    function respond() {
+        if (request.readyState == 4 && request.status == 200) {
+            const resp = JSON.parse(request.response);
+            // console.log(resp.message);
+            // console.log(resp.error);
+
+            if(!resp.error)
+            {
+                document.getElementById('del-msg-success').innerHTML = resp.message;
+            }
+            else 
+            {
+                document.getElementById('del-msg-error').innerHTML = resp.error;
+            }
+
+        }
+    }
+    
+};
+
+
 

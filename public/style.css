@@ -59,6 +59,18 @@ span:hover
     font-size: 30px;
 }
 
+form
+{
+    padding: 10px;
+}
+
+input, select, #submit
+{
+    height: 45px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
 .adverts
 {
     position: fixed;
